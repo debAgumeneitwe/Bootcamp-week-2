@@ -22,8 +22,17 @@ class Test_create_room(unittest.TestCase):
         self.assertEqual("fellow", fellow.position,
                         msg = "Added staff successfully")
         
-
+    def test_if_living_option_is_yes(self):
+        fellow = Fellow("Christine", "Y")
+        self.assertEqual("Y", fellow.living_option,
+                       msg = "Living option should be yes")
         
+    def test_if_living_option_is_no(self):
+        fellow = Fellow("Bruce", "N")
+        self.assertEqual("N", fellow.living_option,
+                       msg = "Living option should be a no")
+        
+# def test_allocates_living_space_to_fellow:
         
         
         
