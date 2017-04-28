@@ -1,8 +1,7 @@
-"""Greeter.
-
+""""
 Usage:
-    create_room <room_name> <room_type>
-    add person <name>
+    create_room <room_name> <room_type>...
+    add person <full_name> <position>
     -h | --help
 
 Options:
@@ -45,21 +44,33 @@ def docopt_decorator(func):
     return fn
 
 
-class DojoEntryPoint(cmd.Cmd):
+class DojoInteractive(cmd.Cmd):
+    intro = 'Welcome to the Room Allocation System!' + ' (Type help for a list of commands.)'
+    prompt = '(The Dojo) '
+    file = None
     
     
     @docopt_decorator
     def do_create_room(self, arg):
-        """Usage: create_room <room_name> <room_type>"""
+        """Usage: create_room <room_name> <room_type>..."""
         room_name = arg['<room_name>']
         room_type = arg['<room_type>']
-        print(room_name, " ", room_type)
-        #print ("Room has been created")
+        for name in room_name:
+            print(room_type, " called ", room_name, " has been successfully created")
+        
+        
+    @docopt_decorator
+    def do_add_person(self,arg):
+        """Usage: add_person <full_name> <position>"""
+        full_name = arg["<full_name>"]
+        position = arg["<position>"]
+        print(full_name, "has been successfully added")
+        
         
     
     
     
-DojoEntryPoint().cmdloop()
+DojoInteractive().cmdloop()
     
     
     
